@@ -24,7 +24,6 @@ page_options = ["📊 대시보드"] + [
 selected = st.sidebar.radio("메뉴", page_options, label_visibility="collapsed")
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Chemistry PhD + Marketing PhD")
 st.sidebar.caption("미국 이주 준비 체크리스트")
 
 # Route to page

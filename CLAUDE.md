@@ -1,9 +1,7 @@
 # US Relocation Planner
 
 ## Project Overview
-미국 이주를 준비하는 한국인 부부를 위한 체크리스트/플래너 앱.
-- Person A: Chemistry PhD, AI drug discovery 분야
-- Person B: Quant marketing PhD, causal inference 분야
+미국 이주를 준비하는 사용자를 위한 체크리스트/플래너 앱.
 
 ## Tech Stack
 - **Python 3.13** (uv로 패키지 관리)

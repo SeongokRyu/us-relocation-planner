@@ -1,7 +1,7 @@
 [
   {
     "title": "비자 종류 결정 (H-1B, O-1, J-1 등)",
-    "description": "각자의 상황에 맞는 비자 종류를 조사하고 결정. Chemistry PhD → H-1B/O-1, Quant Marketing PhD → H-1B/O-1",
+    "description": "각자의 상황에 맞는 비자 종류를 조사하고 결정 (H-1B, O-1, J-1 등)",
     "category": "visa",
     "priority": "high",
     "assignee": "둘 다"
@@ -119,18 +119,11 @@
     "assignee": "둘 다"
   },
   {
-    "title": "AI Drug Discovery 포지션 탐색",
-    "description": "Pharma (Pfizer, Roche 등), Biotech 스타트업, 테크 기업 R&D 포지션 조사",
+    "title": "관심 분야 포지션 탐색",
+    "description": "각자 전공 및 경력에 맞는 포지션 조사 (LinkedIn, Indeed, Glassdoor 등)",
     "category": "career",
     "priority": "high",
-    "assignee": "Chemistry PhD"
-  },
-  {
-    "title": "Quant Marketing / Causal Inference 포지션 탐색",
-    "description": "Tech (Google, Meta, Amazon 등), 컨설팅, 스타트업 data science 포지션 조사",
-    "category": "career",
-    "priority": "high",
-    "assignee": "Marketing PhD"
+    "assignee": ""
   },
   {
     "title": "인터뷰 준비 (기술 면접 + 행동 면접)",
