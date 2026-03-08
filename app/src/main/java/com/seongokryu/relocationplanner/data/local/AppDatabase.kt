@@ -7,7 +7,7 @@ import com.seongokryu.relocationplanner.data.local.entity.TaskEntity
 
 @Database(
     entities = [TaskEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = true,
 )
 abstract class AppDatabase : RoomDatabase() {

@@ -59,12 +59,6 @@ fun ChecklistScreen(
                 .padding(padding)
                 .padding(16.dp),
         ) {
-            Text(
-                "${viewModel.category.icon} ${viewModel.category.label}",
-                style = MaterialTheme.typography.titleLarge,
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
             if (tasks.isEmpty()) {
                 Text("항목이 없습니다.", style = MaterialTheme.typography.bodyMedium)
             } else {

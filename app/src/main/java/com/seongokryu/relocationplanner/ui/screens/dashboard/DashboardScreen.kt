@@ -1,5 +1,6 @@
 package com.seongokryu.relocationplanner.ui.screens.dashboard
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,6 +27,7 @@ import com.seongokryu.relocationplanner.domain.model.Category
 
 @Composable
 fun DashboardScreen(
+    onCategoryClick: (Category) -> Unit,
     viewModel: DashboardViewModel = hiltViewModel(),
 ) {
     val stats by viewModel.categoryStats.collectAsStateWithLifecycle()
@@ -66,7 +68,10 @@ fun DashboardScreen(
             val catDone = stat?.done ?: 0
 
             Card(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp)
+                    .clickable { onCategoryClick(category) },
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceVariant,
                 ),
@@ -85,7 +90,10 @@ fun DashboardScreen(
                 if (catTotal > 0) {
                     LinearProgressIndicator(
                         progress = { catDone.toFloat() / catTotal },
-                        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).padding(bottom = 12.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                            .padding(bottom = 12.dp),
                     )
                 }
             }

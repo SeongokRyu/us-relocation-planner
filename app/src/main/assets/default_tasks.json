@@ -1,7 +1,7 @@
 [
   {
     "title": "비자 종류 결정 (H-1B, O-1, J-1 등)",
-    "description": "각자의 상황에 맞는 비자 종류를 조사하고 결정 (H-1B, O-1, J-1 등)",
+    "description": "각자의 상황에 맞는 비자 종류를 조사하고 결정",
     "category": "visa",
     "priority": "high",
     "assignee": "둘 다"
@@ -21,6 +21,27 @@
     "assignee": "둘 다"
   },
   {
+    "title": "I-20/DS-2019 등 학교/회사 서류 수령",
+    "description": "비자 스폰서 기관에서 필요 서류 수령",
+    "category": "visa",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "DS-160 온라인 신청서 작성",
+    "description": "미국 비자 온라인 신청서 작성 및 확인 페이지 출력",
+    "category": "visa",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "비자 수수료 납부 (SEVIS Fee 포함)",
+    "description": "비자 신청 수수료 및 SEVIS I-901 Fee 납부",
+    "category": "visa",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
     "title": "비자 인터뷰 준비",
     "description": "대사관 인터뷰 준비 (서류, 예상 질문 등)",
     "category": "visa",
@@ -28,10 +49,59 @@
     "assignee": "둘 다"
   },
   {
-    "title": "I-20/DS-2019 등 학교/회사 서류 수령",
-    "description": "비자 스폰서 기관에서 필요 서류 수령",
-    "category": "visa",
+    "title": "졸업증명서/학위증명서 영문 발급",
+    "description": "최종 학력 증명서 영문본 발급 (대학교 학적과)",
+    "category": "documents",
     "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "혼인관계증명서 영문 발급",
+    "description": "주민센터 또는 대법원 전자가족관계등록시스템에서 발급",
+    "category": "documents",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "가족관계증명서 영문 발급",
+    "description": "주민센터에서 영문 가족관계증명서 발급",
+    "category": "documents",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "범죄경력증명서 발급",
+    "description": "경찰청에서 범죄경력회보서 발급 (영문)",
+    "category": "documents",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "아포스티유 인증 (필요 서류)",
+    "description": "외교부 아포스티유 확인, 필요한 공문서에 대해 인증 받기",
+    "category": "documents",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "운전경력증명서 발급",
+    "description": "경찰청 교통민원24에서 운전경력증명서 발급 (면허 전환 시 필요)",
+    "category": "documents",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "각종 서류 공증/번역",
+    "description": "공증이 필요한 서류 번역 및 공증 처리",
+    "category": "documents",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "중요 서류 사본/스캔본 클라우드 백업",
+    "description": "여권, 비자, 증명서 등 중요 서류 스캔 후 클라우드에 백업",
+    "category": "documents",
+    "priority": "medium",
     "assignee": "둘 다"
   },
   {
@@ -50,7 +120,14 @@
   },
   {
     "title": "아파트 탐색 및 계약",
-    "description": "Zillow, Apartments.com 등으로 매물 탐색. 신용기록 없으면 보증금 추가 필요할 수 있음",
+    "description": "Zillow, Apartments.com 등으로 매물 탐색. 신용기록 없으면 보증금 추가 필요",
+    "category": "housing",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "렌터스 보험 (Renter's Insurance) 가입",
+    "description": "아파트 계약 시 필수인 경우 많음. Lemonade, State Farm 등 비교",
     "category": "housing",
     "priority": "medium",
     "assignee": "둘 다"
@@ -63,10 +140,24 @@
     "assignee": "둘 다"
   },
   {
+    "title": "우편 주소 등록 (USPS)",
+    "description": "USPS Informed Delivery 등록, 우편물 수령 체계 구축",
+    "category": "housing",
+    "priority": "low",
+    "assignee": "둘 다"
+  },
+  {
     "title": "가구/생활용품 구매 계획",
     "description": "IKEA, Amazon, Target 등에서 필수 가구 및 생활용품 리스트 작성",
     "category": "housing",
     "priority": "low",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "비상 자금 확보 (첫 3개월 생활비)",
+    "description": "도착 초기 수입 없는 기간 대비, 최소 3개월 생활비 준비",
+    "category": "finance",
+    "priority": "high",
     "assignee": "둘 다"
   },
   {
@@ -84,10 +175,10 @@
     "assignee": "둘 다"
   },
   {
-    "title": "신용카드 발급",
-    "description": "Secured credit card부터 시작. 신용 점수 쌓기 시작",
+    "title": "ITIN 신청 (SSN 발급 전 대안 검토)",
+    "description": "SSN 자격이 없는 경우 ITIN(Individual Taxpayer Identification Number) 신청 검토",
     "category": "finance",
-    "priority": "medium",
+    "priority": "high",
     "assignee": "둘 다"
   },
   {
@@ -98,8 +189,50 @@
     "assignee": "둘 다"
   },
   {
+    "title": "신용카드 발급 (Secured card부터)",
+    "description": "Secured credit card부터 시작. 신용 점수 쌓기 시작",
+    "category": "finance",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "신용점수 (Credit Score) 쌓기 전략",
+    "description": "Credit Karma 등록, Authorized User 전략, 소액 결제 후 전액 상환 습관",
+    "category": "finance",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
     "title": "세금 관련 조사 (한미 이중과세 방지 협정)",
     "description": "한국 및 미국 세금 신고 의무 확인, 필요시 세무사 상담",
+    "category": "finance",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "미국 세금 신고 절차 파악 (W-2, 1040)",
+    "description": "Filing Status, 세금 신고 기한(4/15), 자동 연장(6/15) 등 기본 절차 이해",
+    "category": "finance",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "FBAR/FATCA 해외금융계좌 신고 의무 확인",
+    "description": "해외 계좌 합산 $10,000 초과 시 FBAR(FinCEN 114) 신고 의무. FATCA(Form 8938)도 확인",
+    "category": "finance",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "한국 출국 전 종합소득세 신고",
+    "description": "출국 전 해당 연도 소득에 대한 종합소득세 신고 처리",
+    "category": "finance",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "한국 은행 계좌 정리/유지 전략",
+    "description": "유지할 계좌 선별, 불필요한 계좌 해지, 해외 송금 가능 여부 확인",
     "category": "finance",
     "priority": "medium",
     "assignee": "둘 다"
@@ -126,6 +259,13 @@
     "assignee": ""
   },
   {
+    "title": "네트워킹 (Meetup, 학회, 한인 전문가 모임)",
+    "description": "해당 분야 Meetup, 학회, 한인 전문가 커뮤니티 조사 및 참여 계획",
+    "category": "career",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
     "title": "인터뷰 준비 (기술 면접 + 행동 면접)",
     "description": "코딩 테스트, 케이스 스터디, 행동 면접 준비",
     "category": "career",
@@ -133,58 +273,191 @@
     "assignee": "둘 다"
   },
   {
+    "title": "미국 취업 시장/문화 이해",
+    "description": "At-will employment, Benefits(401k, PTO), Offer negotiation 등 미국 취업 문화 학습",
+    "category": "career",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "전문 자격증/라이선스 이전 확인",
+    "description": "한국 자격증의 미국 내 인정 여부 확인, 필요시 미국 자격증 취득 계획",
+    "category": "career",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "건강보험 가입 (직장 or Marketplace)",
+    "description": "직장 보험 또는 Healthcare.gov Marketplace 보험 가입. 비자 상태에 따라 옵션 확인",
+    "category": "medical",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "이민 신체검사 (지정 병원 방문)",
+    "description": "미국 대사관 지정 병원에서 이민 신체검사 완료 (비자 종류에 따라 필요)",
+    "category": "medical",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "예방접종 기록 확인 및 보완",
+    "description": "미국 입국/학교/직장에 필요한 예방접종 기록 확인, 미접종 항목 보완",
+    "category": "medical",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "출국 전 종합 건강검진",
+    "description": "출국 전 종합검진으로 건강 상태 확인. 미국 의료비가 비싸므로 미리 체크",
+    "category": "medical",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "출국 전 치과/안과 검진",
+    "description": "미국 치과/안과 비용이 매우 높으므로 출국 전 치료 완료",
+    "category": "medical",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "복용 중인 처방약 영문 처방전 확보",
+    "description": "현재 복용 중인 약의 영문 처방전 및 진단서 확보. 약물 성분명(Generic name) 기록",
+    "category": "medical",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "의료기록 영문 번역본 준비",
+    "description": "주요 의료기록 영문 번역본 준비 (수술 이력, 만성질환 등)",
+    "category": "medical",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "미국 의료 시스템 이해 (PCP, 전문의 의뢰 절차)",
+    "description": "PCP(주치의) 선택, Referral 시스템, Copay/Deductible 개념 학습",
+    "category": "medical",
+    "priority": "low",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "국제 운전면허증 발급",
+    "description": "한국에서 국제 운전면허증 발급 (도착 후 임시 운전용, 유효기간 1년)",
+    "category": "transport",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "미국 운전면허 취득 계획 (주별 절차)",
+    "description": "거주 주의 운전면허 취득 절차 확인 (필기 + 실기). 주마다 규정 상이",
+    "category": "transport",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "자동차 구매/리스 조사",
+    "description": "신용 없이 구매/리스 가능한 옵션 조사. 중고차 vs 신차, 딜러십 비교",
+    "category": "transport",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "자동차 보험 가입",
+    "description": "Liability 최소 가입 필수. Full coverage 권장. 신용 없으면 보험료 높을 수 있음",
+    "category": "transport",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "해당 지역 대중교통 조사",
+    "description": "거주 지역의 버스, 지하철, 통근열차 등 대중교통 노선 및 요금 확인",
+    "category": "transport",
+    "priority": "low",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "차량 등록 (Registration) & 주 검사 (Inspection)",
+    "description": "차량 구매 후 DMV에서 등록, 해당 주 차량 검사(Inspection) 절차 확인",
+    "category": "transport",
+    "priority": "low",
+    "assignee": "둘 다"
+  },
+  {
     "title": "국제 이사 업체 조사 및 견적",
-    "description": "한국 → 미국 이삿짐 운송 업체 비교 (해상/항공)",
-    "category": "logistics",
+    "description": "한국 → 미국 이삿짐 운송 업체 비교 (해상/항공). 최소 2-3개 견적",
+    "category": "korea_departure",
     "priority": "high",
     "assignee": "둘 다"
   },
   {
     "title": "항공권 예약",
-    "description": "편도 항공권 예약, 짐 수하물 규정 확인",
-    "category": "logistics",
+    "description": "편도 항공권 예약, 짐 수하물 규정 확인. 반려동물 동반 시 사전 확인",
+    "category": "korea_departure",
     "priority": "high",
     "assignee": "둘 다"
   },
   {
-    "title": "국제 운전면허증 발급",
-    "description": "한국에서 국제 운전면허증 발급 (도착 후 임시 운전용)",
-    "category": "logistics",
-    "priority": "medium",
-    "assignee": "둘 다"
-  },
-  {
-    "title": "미국 운전면허 취득 계획",
-    "description": "주별 운전면허 취득 절차 확인 (필기 + 실기)",
-    "category": "logistics",
-    "priority": "medium",
-    "assignee": "둘 다"
-  },
-  {
-    "title": "건강보험 가입",
-    "description": "직장 보험 또는 Marketplace 보험 가입. 비자 상태에 따라 옵션 확인",
-    "category": "logistics",
+    "title": "주민등록 해외이전 신고",
+    "description": "출국 전 주민센터에서 해외이전 신고 (재외국민 전환)",
+    "category": "korea_departure",
     "priority": "high",
     "assignee": "둘 다"
   },
   {
-    "title": "미국 핸드폰 개통",
-    "description": "T-Mobile, AT&T 등 통신사 비교, 한국 번호 유지 방법도 확인",
-    "category": "logistics",
+    "title": "재외국민등록 (90일 이상 체류 시)",
+    "description": "해외 90일 이상 체류 시 재외공관에 재외국민등록 의무",
+    "category": "korea_departure",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "국민연금 처리 (납부예외 or 일시금 반환)",
+    "description": "해외이주 시 납부예외 신청 또는 일시금 반환 청구 가능. 수령 조건 확인",
+    "category": "korea_departure",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "국민건강보험 자격 상실 신고",
+    "description": "90일 이상 해외 체류 시 건강보험 자격 상실. 납부한 보험료 환불 가능",
+    "category": "korea_departure",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "한국 핸드폰 해지/번호 유지",
+    "description": "번호 유지 필요 시 알뜰폰 전환 또는 eSIM 활용. 불필요 시 해지",
+    "category": "korea_departure",
     "priority": "medium",
     "assignee": "둘 다"
   },
   {
-    "title": "한국 각종 해지/정리",
-    "description": "한국 핸드폰, 보험, 구독 서비스 등 정리. 주민등록 해외이전 신고",
-    "category": "logistics",
+    "title": "한국 보험 해지/정리",
+    "description": "실손보험, 생명보험 등 유지/해지 결정. 해외 거주 시 보장 범위 확인",
+    "category": "korea_departure",
     "priority": "medium",
     "assignee": "둘 다"
   },
   {
-    "title": "예방접종 기록 확인",
-    "description": "미국 입국/학교/직장에 필요한 예방접종 기록 확인 및 영문 서류 준비",
-    "category": "logistics",
+    "title": "한국 구독 서비스 정리",
+    "description": "스트리밍, 멤버십, 정기결제 등 불필요한 구독 해지",
+    "category": "korea_departure",
+    "priority": "low",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "한국 우편물 수령 대리인 지정",
+    "description": "부재 중 우편물 수령할 대리인(가족 등) 지정, 주요 기관 주소 변경",
+    "category": "korea_departure",
+    "priority": "low",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "가족/지인 인사 & 송별",
+    "description": "출국 전 가족, 친구, 동료에게 인사. 송별 모임 계획",
+    "category": "korea_departure",
     "priority": "low",
     "assignee": "둘 다"
   }

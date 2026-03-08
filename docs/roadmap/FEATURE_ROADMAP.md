@@ -6,6 +6,7 @@
 |-------|------|------|------|
 | 0 | Harness 구축 | ✅ Complete | [HARNESS_PLAN.md](../HARNESS_PLAN.md) |
 | 1 | Foundation | ✅ Complete | — (초기 셋업) |
+| 1.5 | Content 정비 | ✅ Complete | [content-categories.md](../specs/content-categories.md) |
 | 2 | Core Checklist | 🔄 Next | [phase2-core-checklist.md](../specs/phase2-core-checklist.md) |
 | 3 | Dashboard & UX | ⬜ Planned | phase3-dashboard-ux.md |
 | 4 | Productivity | ⬜ Planned | phase4-productivity.md |
@@ -35,6 +36,15 @@
 - [x] Dashboard Screen skeleton
 - [x] Checklist Screen skeleton
 - [x] default_tasks.json seed data (27 items)
+
+## Phase 1.5 — Content 정비 ✅
+
+- [x] 카테고리 재구성: 5개 → 8개 (DOCUMENTS, MEDICAL, TRANSPORT, KOREA_DEPARTURE 추가)
+- [x] LOGISTICS 카테고리 해체 → 항목들을 적절한 카테고리로 분산
+- [x] 체크리스트 항목: 27개 → 66개 (39개 신규 항목 추가)
+- [x] 네비게이션: Bottom Nav → Dashboard 허브 방식 (TopAppBar + 카드 클릭)
+- [x] DB version 2 + destructive migration
+- [x] 콘텐츠 스펙 문서 작성 (docs/specs/content-categories.md)
 
 ## Phase 2 — Core Checklist 🔄
 

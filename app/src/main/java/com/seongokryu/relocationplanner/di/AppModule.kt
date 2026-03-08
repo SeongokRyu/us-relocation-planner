@@ -22,7 +22,8 @@ object AppModule {
             context,
             AppDatabase::class.java,
             "relocation_planner.db",
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
 
     @Provides
     fun provideTaskDao(database: AppDatabase): TaskDao =
