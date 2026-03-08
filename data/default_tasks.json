@@ -1,0 +1,198 @@
+[
+  {
+    "title": "비자 종류 결정 (H-1B, O-1, J-1 등)",
+    "description": "각자의 상황에 맞는 비자 종류를 조사하고 결정. Chemistry PhD → H-1B/O-1, Quant Marketing PhD → H-1B/O-1",
+    "category": "visa",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "이민 변호사 선임",
+    "description": "미국 이민 전문 변호사 상담 및 선임",
+    "category": "visa",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "여권 유효기간 확인 및 갱신",
+    "description": "여권 만료일 확인, 최소 6개월 이상 유효기간 필요",
+    "category": "visa",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "비자 인터뷰 준비",
+    "description": "대사관 인터뷰 준비 (서류, 예상 질문 등)",
+    "category": "visa",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "I-20/DS-2019 등 학교/회사 서류 수령",
+    "description": "비자 스폰서 기관에서 필요 서류 수령",
+    "category": "visa",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "미국 내 거주 도시/지역 조사",
+    "description": "직장 위치, 생활비, 한인 커뮤니티, 안전성 등 고려",
+    "category": "housing",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "임시 숙소 예약 (첫 1-2주)",
+    "description": "도착 직후 머물 Airbnb 또는 호텔 예약",
+    "category": "housing",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "아파트 탐색 및 계약",
+    "description": "Zillow, Apartments.com 등으로 매물 탐색. 신용기록 없으면 보증금 추가 필요할 수 있음",
+    "category": "housing",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "유틸리티 셋업 (전기, 가스, 인터넷)",
+    "description": "아파트 입주 후 각종 유틸리티 개통",
+    "category": "housing",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "가구/생활용품 구매 계획",
+    "description": "IKEA, Amazon, Target 등에서 필수 가구 및 생활용품 리스트 작성",
+    "category": "housing",
+    "priority": "low",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "미국 은행 계좌 개설",
+    "description": "Chase, Bank of America 등. SSN 없이도 개설 가능한 은행 확인",
+    "category": "finance",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "SSN (Social Security Number) 신청",
+    "description": "입국 후 Social Security Office 방문하여 신청. 비자 종류에 따라 절차 상이",
+    "category": "finance",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "신용카드 발급",
+    "description": "Secured credit card부터 시작. 신용 점수 쌓기 시작",
+    "category": "finance",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "한국 → 미국 송금 방법 조사",
+    "description": "Wise, 은행 송금 등 환율 및 수수료 비교",
+    "category": "finance",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "세금 관련 조사 (한미 이중과세 방지 협정)",
+    "description": "한국 및 미국 세금 신고 의무 확인, 필요시 세무사 상담",
+    "category": "finance",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "이력서(Resume) 미국식으로 업데이트",
+    "description": "미국 형식에 맞게 이력서 작성. 사진/나이/성별 제거",
+    "category": "career",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "LinkedIn 프로필 최적화",
+    "description": "영문 LinkedIn 프로필 업데이트, 네트워킹 시작",
+    "category": "career",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "AI Drug Discovery 포지션 탐색",
+    "description": "Pharma (Pfizer, Roche 등), Biotech 스타트업, 테크 기업 R&D 포지션 조사",
+    "category": "career",
+    "priority": "high",
+    "assignee": "Chemistry PhD"
+  },
+  {
+    "title": "Quant Marketing / Causal Inference 포지션 탐색",
+    "description": "Tech (Google, Meta, Amazon 등), 컨설팅, 스타트업 data science 포지션 조사",
+    "category": "career",
+    "priority": "high",
+    "assignee": "Marketing PhD"
+  },
+  {
+    "title": "인터뷰 준비 (기술 면접 + 행동 면접)",
+    "description": "코딩 테스트, 케이스 스터디, 행동 면접 준비",
+    "category": "career",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "국제 이사 업체 조사 및 견적",
+    "description": "한국 → 미국 이삿짐 운송 업체 비교 (해상/항공)",
+    "category": "logistics",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "항공권 예약",
+    "description": "편도 항공권 예약, 짐 수하물 규정 확인",
+    "category": "logistics",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "국제 운전면허증 발급",
+    "description": "한국에서 국제 운전면허증 발급 (도착 후 임시 운전용)",
+    "category": "logistics",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "미국 운전면허 취득 계획",
+    "description": "주별 운전면허 취득 절차 확인 (필기 + 실기)",
+    "category": "logistics",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "건강보험 가입",
+    "description": "직장 보험 또는 Marketplace 보험 가입. 비자 상태에 따라 옵션 확인",
+    "category": "logistics",
+    "priority": "high",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "미국 핸드폰 개통",
+    "description": "T-Mobile, AT&T 등 통신사 비교, 한국 번호 유지 방법도 확인",
+    "category": "logistics",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "한국 각종 해지/정리",
+    "description": "한국 핸드폰, 보험, 구독 서비스 등 정리. 주민등록 해외이전 신고",
+    "category": "logistics",
+    "priority": "medium",
+    "assignee": "둘 다"
+  },
+  {
+    "title": "예방접종 기록 확인",
+    "description": "미국 입국/학교/직장에 필요한 예방접종 기록 확인 및 영문 서류 준비",
+    "category": "logistics",
+    "priority": "low",
+    "assignee": "둘 다"
+  }
+]
