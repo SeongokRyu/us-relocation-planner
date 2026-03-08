@@ -22,6 +22,16 @@
 - Coroutines + Flow (async)
 - Clean Architecture + MVVM
 
+## Environment Setup
+
+```bash
+export JAVA_HOME=/home/seongokryu/tools/jdk-17.0.13+11
+export ANDROID_HOME=/home/seongokryu/tools/android-sdk
+export PATH="$JAVA_HOME/bin:$PATH"
+```
+
+또는 wrapper 사용: `/home/seongokryu/tools/setup_env.sh <command>`
+
 ## Build Commands
 
 ```bash
@@ -31,6 +41,20 @@
 ./gradlew detekt             # 정적 분석
 ./gradlew ktlintFormat       # 자동 포매팅
 ```
+
+## Pre-Commit Verification (커밋 전 반드시 실행)
+
+코드 변경 후 커밋 전에 아래 검증을 순서대로 통과해야 한다:
+
+```bash
+./gradlew ktlintFormat       # 1. 자동 포매팅 적용
+./gradlew ktlintCheck        # 2. 코드 스타일 검증
+./gradlew detekt             # 3. 정적 분석
+./gradlew assembleDebug      # 4. 빌드 성공 확인
+./gradlew test               # 5. 유닛 테스트 통과
+```
+
+모든 단계 통과 후에만 커밋한다. 실패 시 수정 후 재실행.
 
 ## Architecture Invariants (반드시 준수)
 

@@ -40,9 +40,7 @@ import com.seongokryu.relocationplanner.ui.theme.PriorityLow
 import com.seongokryu.relocationplanner.ui.theme.PriorityMedium
 
 @Composable
-fun ChecklistScreen(
-    viewModel: ChecklistViewModel = hiltViewModel(),
-) {
+fun ChecklistScreen(viewModel: ChecklistViewModel = hiltViewModel()) {
     val tasks by viewModel.tasks.collectAsStateWithLifecycle()
     var showAddDialog by remember { mutableStateOf(false) }
 
@@ -51,13 +49,14 @@ fun ChecklistScreen(
             FloatingActionButton(onClick = { showAddDialog = true }) {
                 Icon(Icons.Default.Add, contentDescription = "추가")
             }
-        }
+        },
     ) { padding ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .padding(16.dp),
         ) {
             if (tasks.isEmpty()) {
                 Text("항목이 없습니다.", style = MaterialTheme.typography.bodyMedium)
@@ -91,17 +90,19 @@ private fun TaskCard(
     task: Task,
     onToggle: () -> Unit,
 ) {
-    val priorityColor = when (task.priority) {
-        Priority.HIGH -> PriorityHigh
-        Priority.MEDIUM -> PriorityMedium
-        Priority.LOW -> PriorityLow
-    }
+    val priorityColor =
+        when (task.priority) {
+            Priority.HIGH -> PriorityHigh
+            Priority.MEDIUM -> PriorityMedium
+            Priority.LOW -> PriorityLow
+        }
 
     Card(
         modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-        ),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface,
+            ),
     ) {
         Row(
             modifier = Modifier.padding(12.dp),
@@ -111,9 +112,10 @@ private fun TaskCard(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     task.title,
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        textDecoration = if (task.isDone) TextDecoration.LineThrough else null,
-                    ),
+                    style =
+                        MaterialTheme.typography.bodyLarge.copy(
+                            textDecoration = if (task.isDone) TextDecoration.LineThrough else null,
+                        ),
                 )
                 if (task.description.isNotBlank()) {
                     Text(

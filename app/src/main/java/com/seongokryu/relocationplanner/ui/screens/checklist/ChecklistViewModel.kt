@@ -14,31 +14,34 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ChecklistViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
-    private val repository: TaskRepository,
-) : ViewModel() {
+class ChecklistViewModel
+    @Inject
+    constructor(
+        savedStateHandle: SavedStateHandle,
+        private val repository: TaskRepository,
+    ) : ViewModel() {
+        val category: Category =
+            Category.valueOf(
+                savedStateHandle.get<String>("category") ?: Category.VISA.name,
+            )
 
-    val category: Category = Category.valueOf(
-        savedStateHandle.get<String>("category") ?: Category.VISA.name
-    )
+        val tasks: StateFlow<List<Task>> =
+            repository.getTasksByCategory(category)
+                .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    val tasks: StateFlow<List<Task>> = repository.getTasksByCategory(category)
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+        fun toggleTask(taskId: Long) {
+            viewModelScope.launch { repository.toggleTask(taskId) }
+        }
 
-    fun toggleTask(taskId: Long) {
-        viewModelScope.launch { repository.toggleTask(taskId) }
+        fun addTask(task: Task) {
+            viewModelScope.launch { repository.addTask(task) }
+        }
+
+        fun deleteTask(task: Task) {
+            viewModelScope.launch { repository.deleteTask(task) }
+        }
+
+        fun updateTask(task: Task) {
+            viewModelScope.launch { repository.updateTask(task) }
+        }
     }
-
-    fun addTask(task: Task) {
-        viewModelScope.launch { repository.addTask(task) }
-    }
-
-    fun deleteTask(task: Task) {
-        viewModelScope.launch { repository.deleteTask(task) }
-    }
-
-    fun updateTask(task: Task) {
-        viewModelScope.launch { repository.updateTask(task) }
-    }
-}

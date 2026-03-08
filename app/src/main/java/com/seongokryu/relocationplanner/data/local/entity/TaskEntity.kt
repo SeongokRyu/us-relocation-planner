@@ -25,31 +25,33 @@ data class TaskEntity(
     @ColumnInfo(name = "updated_at")
     val updatedAt: String = "",
 ) {
-    fun toDomain(): Task = Task(
-        id = id,
-        title = title,
-        description = description,
-        category = Category.valueOf(category),
-        priority = Priority.valueOf(priority),
-        isDone = isDone,
-        assignee = assignee,
-        dueDate = dueDate,
-        createdAt = createdAt,
-        updatedAt = updatedAt,
-    )
+    fun toDomain(): Task =
+        Task(
+            id = id,
+            title = title,
+            description = description,
+            category = Category.valueOf(category),
+            priority = Priority.valueOf(priority),
+            isDone = isDone,
+            assignee = assignee,
+            dueDate = dueDate,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+        )
 
     companion object {
-        fun fromDomain(task: Task): TaskEntity = TaskEntity(
-            id = task.id,
-            title = task.title,
-            description = task.description,
-            category = task.category.name,
-            priority = task.priority.name,
-            isDone = task.isDone,
-            assignee = task.assignee,
-            dueDate = task.dueDate,
-            createdAt = task.createdAt,
-            updatedAt = task.updatedAt,
-        )
+        fun fromDomain(task: Task): TaskEntity =
+            TaskEntity(
+                id = task.id,
+                title = task.title,
+                description = task.description,
+                category = task.category.name,
+                priority = task.priority.name,
+                isDone = task.isDone,
+                assignee = task.assignee,
+                dueDate = task.dueDate,
+                createdAt = task.createdAt,
+                updatedAt = task.updatedAt,
+            )
     }
 }

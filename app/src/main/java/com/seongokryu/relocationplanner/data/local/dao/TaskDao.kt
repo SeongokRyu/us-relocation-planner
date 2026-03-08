@@ -11,19 +11,20 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
-
     @Query("SELECT * FROM tasks ORDER BY priority ASC, created_at ASC")
     fun getAllTasks(): Flow<List<TaskEntity>>
 
     @Query("SELECT * FROM tasks WHERE category = :category ORDER BY priority ASC, created_at ASC")
     fun getTasksByCategory(category: String): Flow<List<TaskEntity>>
 
-    @Query("""
+    @Query(
+        """
         SELECT category,
                COUNT(*) as total,
                SUM(CASE WHEN is_done = 1 THEN 1 ELSE 0 END) as done
         FROM tasks GROUP BY category
-    """)
+    """,
+    )
     fun getCategoryStats(): Flow<List<CategoryStat>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -36,7 +37,10 @@ interface TaskDao {
     suspend fun update(task: TaskEntity)
 
     @Query("UPDATE tasks SET is_done = NOT is_done, updated_at = :updatedAt WHERE id = :taskId")
-    suspend fun toggleDone(taskId: Long, updatedAt: String)
+    suspend fun toggleDone(
+        taskId: Long,
+        updatedAt: String,
+    )
 
     @Delete
     suspend fun delete(task: TaskEntity)

@@ -22,6 +22,7 @@ import com.seongokryu.relocationplanner.ui.screens.dashboard.DashboardScreen
 
 sealed class Screen(val route: String) {
     data object Dashboard : Screen("dashboard")
+
     data object Checklist : Screen("checklist/{category}") {
         fun createRoute(category: Category) = "checklist/${category.name}"
     }

@@ -36,10 +36,11 @@ fun DashboardScreen(
     val highPriority = viewModel.getHighPriorityPending(tasks)
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
     ) {
         // Overall progress
         Text("전체 진행률", style = MaterialTheme.typography.titleLarge)
@@ -68,13 +69,15 @@ fun DashboardScreen(
             val catDone = stat?.done ?: 0
 
             Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 4.dp)
-                    .clickable { onCategoryClick(category) },
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                ),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp)
+                        .clickable { onCategoryClick(category) },
+                colors =
+                    CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    ),
             ) {
                 Row(
                     modifier = Modifier.padding(16.dp).fillMaxWidth(),
@@ -90,10 +93,11 @@ fun DashboardScreen(
                 if (catTotal > 0) {
                     LinearProgressIndicator(
                         progress = { catDone.toFloat() / catTotal },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .padding(bottom = 12.dp),
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp)
+                                .padding(bottom = 12.dp),
                     )
                 }
             }
