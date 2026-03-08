@@ -4,6 +4,10 @@
 
 카테고리별로 할 일을 관리하고, 대시보드에서 전체 진행률을 확인할 수 있습니다.
 
+> **Harness Engineering** 방식으로 개발합니다.
+> Human의 개입을 최소화하고, AI 에이전트가 spec 기반으로 구현 → CI 검증 → 머지하는 사이클을 따릅니다.
+> 자세한 내용은 [docs/HARNESS_PLAN.md](docs/HARNESS_PLAN.md)를 참고하세요.
+
 ## Tech Stack
 
 | 구성 요소 | 기술 |
@@ -39,6 +43,12 @@
 └─────────────────────────────────────┘
 ```
 
+**Dependency Rules:**
+- `domain/` → 순수 Kotlin, 외부 의존성 없음
+- `data/` → domain만 import
+- `ui/` → ViewModel 경유, data/local 직접 참조 금지
+- `di/` → 모든 레이어 참조 가능 (wiring 전용)
+
 ## Project Structure
 
 ```
@@ -67,6 +77,15 @@ app/src/main/java/com/seongokryu/relocationplanner/
 - **체크리스트** — 5개 카테고리 (비자, 주거, 재정, 커리어, 이사)
 - **CRUD** — 항목 추가/수정/삭제/완료 토글
 - **기본 데이터** — 첫 실행 시 27개 기본 항목 자동 생성
+
+## Development Methodology
+
+```
+Feature Spec (human) → Agent 구현 (code + test) → CI 검증 → PR 리뷰 → 머지
+```
+
+자세한 로드맵과 harness 구축 계획은 아래 문서를 참고:
+- [Harness Plan](docs/HARNESS_PLAN.md)
 
 ## License
 
