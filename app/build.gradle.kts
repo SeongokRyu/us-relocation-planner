@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.room)
+    alias(libs.plugins.ktlint)
 }
 
 android {
@@ -80,4 +81,13 @@ dependencies {
 
     // JSON
     implementation(libs.gson)
+
+    // Testing
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.turbine)
+    androidTestImplementation(libs.compose.ui.test)
+    androidTestImplementation(libs.room.testing)
+    debugImplementation(libs.compose.ui.test.manifest)
 }

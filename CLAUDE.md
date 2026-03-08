@@ -1,47 +1,77 @@
-# US Relocation Planner
+# US Relocation Planner — Agent Harness
 
-## Project Overview
-미국 이주를 준비하는 사용자를 위한 체크리스트/플래너 Android 앱.
+> 이 파일은 AI 에이전트의 진입점. 상세 내용은 docs/ 링크를 따라간다.
+
+## Quick Reference
+
+| 영역 | 문서 |
+|------|------|
+| Architecture Overview | [docs/architecture/OVERVIEW.md](docs/architecture/OVERVIEW.md) |
+| Dependency Rules | [docs/architecture/DEPENDENCY_RULES.md](docs/architecture/DEPENDENCY_RULES.md) |
+| Architecture Decisions | [docs/architecture/ADR/](docs/architecture/ADR/) |
+| Coding Style | [docs/conventions/CODING_STYLE.md](docs/conventions/CODING_STYLE.md) |
+| Testing Strategy | [docs/conventions/TESTING.md](docs/conventions/TESTING.md) |
+| PR Checklist | [docs/conventions/PR_CHECKLIST.md](docs/conventions/PR_CHECKLIST.md) |
+| Feature Roadmap | [docs/roadmap/FEATURE_ROADMAP.md](docs/roadmap/FEATURE_ROADMAP.md) |
+| Harness Plan | [docs/HARNESS_PLAN.md](docs/HARNESS_PLAN.md) |
 
 ## Tech Stack
-- **Kotlin 2.0** + **Jetpack Compose** (선언적 UI)
-- **Room** — SQLite ORM
-- **Hilt** — Dependency Injection
-- **Navigation Compose** — 화면 전환
-- **Coroutines + Flow** — 비동기 처리
 
-## Architecture
-Clean Architecture + MVVM
-```
-domain/model/       → 순수 데이터 모델 (Task, Category, Priority)
-data/local/         → Room Entity, DAO, Database
-data/repository/    → Repository (data layer 추상화)
-di/                 → Hilt DI module
-ui/screens/         → Composable + ViewModel (per screen)
-ui/navigation/      → NavHost + bottom navigation
-ui/theme/           → Material 3 테마
+- Kotlin 2.0 + Jetpack Compose (Material 3)
+- Room (SQLite ORM) + Hilt (DI) + Navigation Compose
+- Coroutines + Flow (async)
+- Clean Architecture + MVVM
+
+## Build Commands
+
+```bash
+./gradlew assembleDebug      # 빌드
+./gradlew test               # 유닛 테스트
+./gradlew ktlintCheck        # 코드 스타일 검사
+./gradlew detekt             # 정적 분석
+./gradlew ktlintFormat       # 자동 포매팅
 ```
 
-## Project Structure
+## Architecture Invariants (반드시 준수)
+
 ```
-app/src/main/
-├── assets/default_tasks.json       # 기본 체크리스트 (27개)
-├── java/com/seongokryu/relocationplanner/
-│   ├── MainActivity.kt             # Single Activity
-│   ├── RelocationApp.kt            # Hilt Application
-│   ├── data/                        # Data layer
-│   ├── di/                          # DI modules
-│   ├── domain/                      # Domain models
-│   └── ui/                          # UI layer
-└── res/                             # Android resources
+domain/  →  순수 Kotlin. Android/Room/Hilt 의존성 금지.
+data/    →  domain만 import. ui 참조 금지.
+ui/      →  ViewModel 경유로만 데이터 접근. data/local 직접 참조 금지.
+di/      →  모든 레이어 참조 가능 (wiring 전용).
 ```
 
-## Build
-- Android Studio에서 열기 → Gradle sync → Run
-- `./gradlew assembleDebug` (CLI 빌드)
+## File Patterns
 
-## Conventions
+새 화면 추가 시 반드시 아래 구조를 따른다:
+```
+ui/screens/<feature>/
+├── <Feature>Screen.kt       # @Composable, stateless
+└── <Feature>ViewModel.kt    # @HiltViewModel, StateFlow
+```
+
+Entity-Domain 매핑:
+```kotlin
+// Entity 내에 정의
+fun toDomain(): Task = ...
+companion object { fun fromDomain(task: Task): TaskEntity = ... }
+```
+
+State 수집:
+```kotlin
+val tasks by viewModel.tasks.collectAsStateWithLifecycle()
+```
+
+## Coding Rules Summary
+
 - 한국어 UI, 영어 코드
-- 화면당 Screen + ViewModel 쌍
-- Room Entity ↔ Domain Model 변환은 Entity 내 toDomain()/fromDomain()
-- StateFlow + collectAsStateWithLifecycle 패턴
+- 파일 200줄 이내 (300줄 초과 시 분리)
+- Wildcard import 금지
+- 새 기능에는 반드시 테스트 동반
+- 테스트 네이밍: `should_<expected>_when_<condition>()`
+- Composable 파라미터 순서: data → modifier → callbacks
+
+## Current Phase
+
+Phase 2 — Core Checklist 구현 중.
+Spec: [docs/specs/phase2-core-checklist.md](docs/specs/phase2-core-checklist.md)
