@@ -7,8 +7,8 @@
 | 0 | Harness 구축 | ✅ Complete | [HARNESS_PLAN.md](../HARNESS_PLAN.md) |
 | 1 | Foundation | ✅ Complete | — (초기 셋업) |
 | 1.5 | Content 정비 | ✅ Complete | [content-categories.md](../specs/content-categories.md) |
-| 2 | Core Checklist | 🔄 Next | [phase2-core-checklist.md](../specs/phase2-core-checklist.md) |
-| 3 | Dashboard & UX | ⬜ Planned | phase3-dashboard-ux.md |
+| 2 | Core Checklist | ✅ Complete | [phase2-core-checklist.md](../specs/phase2-core-checklist.md) |
+| 3 | Dashboard & UX | 🔄 Next | [phase3-dashboard-ux.md](../specs/phase3-dashboard-ux.md) |
 | 4 | Productivity | ⬜ Planned | phase4-productivity.md |
 | 5 | Advanced | ⬜ Planned | phase5-advanced.md |
 | 6 | Sync & Share | ⬜ Planned | phase6-sync.md |
@@ -46,17 +46,17 @@
 - [x] DB version 2 + destructive migration
 - [x] 콘텐츠 스펙 문서 작성 (docs/specs/content-categories.md)
 
-## Phase 2 — Core Checklist 🔄
+## Phase 2 — Core Checklist ✅
 
-- [ ] 체크리스트 필터링 (상태 + 우선순위)
-- [ ] Task 수정 다이얼로그 (EditTaskDialog)
-- [ ] Swipe-to-delete + Snackbar undo
-- [ ] Add Task 다이얼로그 개선 (우선순위, 담당자, 마감일)
-- [ ] 빈 상태 UI (EmptyState)
-- [ ] 유닛 테스트 (ViewModel, Entity mapping)
-- [ ] Integration 테스트 (DAO)
+- [x] 체크리스트 필터링 (상태 + 우선순위)
+- [x] Task 수정 다이얼로그 (EditTaskDialog)
+- [x] Swipe-to-delete + Snackbar undo
+- [x] Add Task 다이얼로그 개선 (우선순위, 담당자, 마감일)
+- [x] 빈 상태 UI (EmptyState)
+- [x] 유닛 테스트 (ViewModel, Entity mapping — 16 tests)
+- [x] Integration 테스트 (DAO — 8 tests, instrumented)
 
-## Phase 3 — Dashboard & UX ⬜
+## Phase 3 — Dashboard & UX 🔄
 
 - [ ] 대시보드 원형 진행률 차트 (Canvas)
 - [ ] 검색 기능 (TopAppBar + SearchBar)

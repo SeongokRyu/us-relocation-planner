@@ -71,6 +71,8 @@ import java.time.format.DateTimeFormatter
 fun ChecklistScreen(viewModel: ChecklistViewModel = hiltViewModel()) {
     val tasks by viewModel.filteredTasks.collectAsStateWithLifecycle()
     val filterState by viewModel.filterState.collectAsStateWithLifecycle()
+    val sortOption by viewModel.sortOption.collectAsStateWithLifecycle()
+    val assignees by viewModel.assignees.collectAsStateWithLifecycle()
     var showAddDialog by remember { mutableStateOf(false) }
     var editingTask by remember { mutableStateOf<Task?>(null) }
     val snackbarHostState = remember { SnackbarHostState() }
@@ -93,7 +95,10 @@ fun ChecklistScreen(viewModel: ChecklistViewModel = hiltViewModel()) {
         ) {
             FilterRow(
                 filterState = filterState,
+                sortOption = sortOption,
+                assignees = assignees,
                 onFilterChanged = { viewModel.updateFilter(it) },
+                onSortChanged = { viewModel.updateSort(it) },
             )
             Spacer(modifier = Modifier.height(12.dp))
 

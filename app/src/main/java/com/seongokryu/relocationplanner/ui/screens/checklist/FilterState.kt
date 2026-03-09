@@ -16,4 +16,5 @@ enum class PriorityFilter(val label: String) {
 data class FilterState(
     val statusFilter: StatusFilter = StatusFilter.ALL,
     val priorityFilter: PriorityFilter = PriorityFilter.ALL,
+    val assigneeFilter: String = "",
 )

@@ -4,6 +4,7 @@ import com.seongokryu.relocationplanner.domain.model.Category
 import com.seongokryu.relocationplanner.domain.model.Priority
 import com.seongokryu.relocationplanner.domain.model.Task
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -15,6 +16,7 @@ class FilterLogicTest {
             category = Category.VISA,
             priority = Priority.HIGH,
             isDone = false,
+            assignee = "본인",
         )
 
     private val doneMediumTask =
@@ -24,6 +26,7 @@ class FilterLogicTest {
             category = Category.VISA,
             priority = Priority.MEDIUM,
             isDone = true,
+            assignee = "둘 다",
         )
 
     private val pendingLowTask =
@@ -33,6 +36,7 @@ class FilterLogicTest {
             category = Category.VISA,
             priority = Priority.LOW,
             isDone = false,
+            assignee = "본인",
         )
 
     // --- StatusFilter tests ---
@@ -85,6 +89,21 @@ class FilterLogicTest {
         assertTrue(matchesPriority(pendingLowTask, PriorityFilter.LOW))
     }
 
+    // --- AssigneeFilter tests ---
+
+    @Test
+    fun should_show_all_when_assignee_filter_empty() {
+        assertTrue(matchesAssignee(pendingHighTask, ""))
+        assertTrue(matchesAssignee(doneMediumTask, ""))
+    }
+
+    @Test
+    fun should_filter_by_assignee() {
+        assertTrue(matchesAssignee(pendingHighTask, "본인"))
+        assertFalse(matchesAssignee(doneMediumTask, "본인"))
+        assertTrue(matchesAssignee(doneMediumTask, "둘 다"))
+    }
+
     // --- Combined filter tests ---
 
     @Test
@@ -125,5 +144,43 @@ class FilterLogicTest {
             }
 
         assertTrue(filtered.isEmpty())
+    }
+
+    // --- Sort tests ---
+
+    @Test
+    fun should_sort_by_priority() {
+        val tasks = listOf(pendingLowTask, pendingHighTask, doneMediumTask)
+        val sorted = sortTasks(tasks, SortOption.PRIORITY)
+
+        assertEquals(Priority.HIGH, sorted[0].priority)
+        assertEquals(Priority.MEDIUM, sorted[1].priority)
+        assertEquals(Priority.LOW, sorted[2].priority)
+    }
+
+    @Test
+    fun should_sort_by_due_date() {
+        val taskA = pendingHighTask.copy(dueDate = "2026-06-01")
+        val taskB = doneMediumTask.copy(dueDate = "2026-03-01")
+        val taskC = pendingLowTask.copy(dueDate = null)
+
+        val sorted = sortTasks(listOf(taskA, taskC, taskB), SortOption.DUE_DATE)
+
+        assertEquals("2026-03-01", sorted[0].dueDate)
+        assertEquals("2026-06-01", sorted[1].dueDate)
+        assertEquals(null, sorted[2].dueDate)
+    }
+
+    @Test
+    fun should_sort_by_created_at() {
+        val taskA = pendingHighTask.copy(createdAt = "2026-03-01")
+        val taskB = doneMediumTask.copy(createdAt = "2026-01-01")
+        val taskC = pendingLowTask.copy(createdAt = "2026-02-01")
+
+        val sorted = sortTasks(listOf(taskA, taskC, taskB), SortOption.CREATED_AT)
+
+        assertEquals("2026-01-01", sorted[0].createdAt)
+        assertEquals("2026-02-01", sorted[1].createdAt)
+        assertEquals("2026-03-01", sorted[2].createdAt)
     }
 }

@@ -29,6 +29,8 @@ class TaskRepository
 
         fun getCategoryStats(): Flow<List<CategoryStat>> = taskDao.getCategoryStats()
 
+        fun searchTasks(query: String): Flow<List<Task>> = taskDao.searchTasks(query).map { entities -> entities.map { it.toDomain() } }
+
         suspend fun addTask(task: Task): Long {
             val now = Instant.now().toString()
             val entity = TaskEntity.fromDomain(task.copy(createdAt = now, updatedAt = now))

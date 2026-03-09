@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,17 +34,30 @@ class ChecklistViewModel
                 .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
         val filterState = MutableStateFlow(FilterState())
+        val sortOption = MutableStateFlow(SortOption.PRIORITY)
+
+        val assignees: StateFlow<List<String>> =
+            allTasks.map { tasks ->
+                tasks.map { it.assignee }.filter { it.isNotBlank() }.distinct().sorted()
+            }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
         val filteredTasks: StateFlow<List<Task>> =
-            combine(allTasks, filterState) { tasks, filter ->
-                tasks.filter { task ->
-                    matchesStatus(task, filter.statusFilter) &&
-                        matchesPriority(task, filter.priorityFilter)
-                }
+            combine(allTasks, filterState, sortOption) { tasks, filter, sort ->
+                tasks
+                    .filter { task ->
+                        matchesStatus(task, filter.statusFilter) &&
+                            matchesPriority(task, filter.priorityFilter) &&
+                            matchesAssignee(task, filter.assigneeFilter)
+                    }
+                    .let { sortTasks(it, sort) }
             }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
         fun updateFilter(newFilter: FilterState) {
             filterState.value = newFilter
+        }
+
+        fun updateSort(option: SortOption) {
+            sortOption.value = option
         }
 
         fun toggleTask(taskId: Long) {
@@ -82,4 +96,22 @@ internal fun matchesPriority(
         PriorityFilter.HIGH -> task.priority == Priority.HIGH
         PriorityFilter.MEDIUM -> task.priority == Priority.MEDIUM
         PriorityFilter.LOW -> task.priority == Priority.LOW
+    }
+
+internal fun matchesAssignee(
+    task: Task,
+    assigneeFilter: String,
+): Boolean = assigneeFilter.isBlank() || task.assignee == assigneeFilter
+
+internal fun sortTasks(
+    tasks: List<Task>,
+    sortOption: SortOption,
+): List<Task> =
+    when (sortOption) {
+        SortOption.PRIORITY -> tasks.sortedBy { it.priority.level }
+        SortOption.DUE_DATE ->
+            tasks.sortedWith(
+                compareBy(nullsLast()) { it.dueDate },
+            )
+        SortOption.CREATED_AT -> tasks.sortedBy { it.createdAt }
     }
