@@ -196,7 +196,7 @@ fun RelocationNavHost(
                 }
                 else -> {
                     TopAppBar(
-                        title = { Text("미국 이주 플래너") },
+                        title = { Text("🇺🇸 렛츠고 USA") },
                         actions = {
                             IconButton(onClick = { dashboardViewModel.toggleSearch() }) {
                                 Icon(Icons.Default.Search, contentDescription = "검색")

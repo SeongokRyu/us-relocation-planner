@@ -39,7 +39,7 @@ object PdfExporter {
         val headerPaint = createPaint(size = 12f, bold = true, color = Color.rgb(33, 150, 243))
 
         // Title
-        canvas.drawText("미국 이주 체크리스트", MARGIN, yPos, titlePaint)
+        canvas.drawText("렛츠고 USA — 이주 체크리스트", MARGIN, yPos, titlePaint)
         yPos += LINE_HEIGHT * 1.5f
 
         // Date
