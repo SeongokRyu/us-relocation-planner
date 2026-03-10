@@ -1,5 +1,8 @@
 package com.seongokryu.relocationplanner.ui.screens.detail
 
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,7 +33,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -75,6 +80,18 @@ private fun TaskDetailContent(
     ) {
         item {
             TaskInfoSection(task = task, onToggle = onToggle)
+        }
+
+        if (task.guide.isNotBlank()) {
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
+                HorizontalDivider()
+                Spacer(modifier = Modifier.height(16.dp))
+                GuideSection(guide = task.guide, referenceUrl = task.referenceUrl)
+            }
+        }
+
+        item {
             Spacer(modifier = Modifier.height(16.dp))
             HorizontalDivider()
             Spacer(modifier = Modifier.height(16.dp))
@@ -188,6 +205,52 @@ private fun InfoRow(
             style = MaterialTheme.typography.bodyMedium,
             color = valueColor,
         )
+    }
+}
+
+@Composable
+private fun GuideSection(
+    guide: String,
+    referenceUrl: String,
+) {
+    val context = LocalContext.current
+
+    Text(
+        "수행 가이드",
+        style = MaterialTheme.typography.titleMedium,
+        fontWeight = FontWeight.Bold,
+    )
+    Spacer(modifier = Modifier.height(8.dp))
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                guide,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+            )
+            if (referenceUrl.isNotBlank()) {
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(
+                    "참고 링크 열기",
+                    style =
+                        MaterialTheme.typography.bodyMedium.copy(
+                            textDecoration = TextDecoration.Underline,
+                        ),
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier =
+                        Modifier.clickable {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(referenceUrl))
+                            context.startActivity(intent)
+                        },
+                )
+            }
+        }
     }
 }
 

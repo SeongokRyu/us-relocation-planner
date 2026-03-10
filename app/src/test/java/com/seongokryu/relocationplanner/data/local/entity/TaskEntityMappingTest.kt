@@ -20,6 +20,8 @@ class TaskEntityMappingTest {
                 isDone = false,
                 assignee = "둘 다",
                 dueDate = "2026-06-01",
+                guide = "1. 비자 종류 결정\n2. 변호사 상담",
+                referenceUrl = "https://example.com",
                 createdAt = "2026-01-01T00:00:00Z",
                 updatedAt = "2026-01-01T00:00:00Z",
             )
@@ -34,6 +36,8 @@ class TaskEntityMappingTest {
         assertEquals(false, task.isDone)
         assertEquals("둘 다", task.assignee)
         assertEquals("2026-06-01", task.dueDate)
+        assertEquals("1. 비자 종류 결정\n2. 변호사 상담", task.guide)
+        assertEquals("https://example.com", task.referenceUrl)
     }
 
     @Test
@@ -48,6 +52,8 @@ class TaskEntityMappingTest {
                 isDone = true,
                 assignee = "본인",
                 dueDate = "2026-07-01",
+                guide = "Zillow에서 검색",
+                referenceUrl = "https://zillow.com",
                 createdAt = "2026-01-01T00:00:00Z",
                 updatedAt = "2026-01-02T00:00:00Z",
             )
@@ -61,6 +67,8 @@ class TaskEntityMappingTest {
         assertEquals(true, entity.isDone)
         assertEquals("본인", entity.assignee)
         assertEquals("2026-07-01", entity.dueDate)
+        assertEquals("Zillow에서 검색", entity.guide)
+        assertEquals("https://zillow.com", entity.referenceUrl)
     }
 
     @Test

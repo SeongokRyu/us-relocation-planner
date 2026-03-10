@@ -71,6 +71,8 @@ class TaskRepository
                         isDone = false,
                         assignee = seed.assignee.orEmpty(),
                         dueDate = seed.due_date,
+                        guide = seed.guide.orEmpty(),
+                        referenceUrl = seed.reference_url.orEmpty(),
                         createdAt = now,
                         updatedAt = now,
                     )
@@ -86,4 +88,6 @@ private data class SeedTask(
     val priority: String?,
     val assignee: String?,
     val due_date: String?,
+    val guide: String?,
+    val reference_url: String?,
 )

@@ -26,6 +26,8 @@ data class Task(
     val isDone: Boolean = false,
     val assignee: String = "",
     val dueDate: String? = null,
+    val guide: String = "",
+    val referenceUrl: String = "",
     val createdAt: String = "",
     val updatedAt: String = "",
 )

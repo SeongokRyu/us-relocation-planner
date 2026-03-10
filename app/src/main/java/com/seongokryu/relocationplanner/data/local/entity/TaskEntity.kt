@@ -20,6 +20,9 @@ data class TaskEntity(
     val assignee: String = "",
     @ColumnInfo(name = "due_date")
     val dueDate: String? = null,
+    val guide: String = "",
+    @ColumnInfo(name = "reference_url")
+    val referenceUrl: String = "",
     @ColumnInfo(name = "created_at")
     val createdAt: String = "",
     @ColumnInfo(name = "updated_at")
@@ -35,6 +38,8 @@ data class TaskEntity(
             isDone = isDone,
             assignee = assignee,
             dueDate = dueDate,
+            guide = guide,
+            referenceUrl = referenceUrl,
             createdAt = createdAt,
             updatedAt = updatedAt,
         )
@@ -50,6 +55,8 @@ data class TaskEntity(
                 isDone = task.isDone,
                 assignee = task.assignee,
                 dueDate = task.dueDate,
+                guide = task.guide,
+                referenceUrl = task.referenceUrl,
                 createdAt = task.createdAt,
                 updatedAt = task.updatedAt,
             )

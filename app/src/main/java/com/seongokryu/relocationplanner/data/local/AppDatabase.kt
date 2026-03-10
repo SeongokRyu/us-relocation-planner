@@ -18,7 +18,7 @@ import com.seongokryu.relocationplanner.data.local.entity.TaskEntity
         ExpenseEntity::class,
         ContactEntity::class,
     ],
-    version = 5,
+    version = 6,
     exportSchema = true,
 )
 abstract class AppDatabase : RoomDatabase() {
