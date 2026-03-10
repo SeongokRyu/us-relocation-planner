@@ -1,6 +1,10 @@
 package com.seongokryu.relocationplanner.di
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import com.seongokryu.relocationplanner.data.local.AppDatabase
 import com.seongokryu.relocationplanner.data.local.dao.TaskDao
@@ -28,4 +32,13 @@ object AppModule {
 
     @Provides
     fun provideTaskDao(database: AppDatabase): TaskDao = database.taskDao()
+
+    @Provides
+    @Singleton
+    fun provideDataStore(
+        @ApplicationContext context: Context,
+    ): DataStore<Preferences> =
+        PreferenceDataStoreFactory.create {
+            context.preferencesDataStoreFile("settings")
+        }
 }

@@ -123,23 +123,52 @@ val isSearchActive: MutableStateFlow<Boolean>
 | `TaskRepository.kt` | `searchTasks(query)` 추가 |
 | `DashboardScreen.kt` | 원형 차트, 검색 결과, 카드 디자인 개선 |
 | `DashboardViewModel.kt` | 검색 관련 StateFlow 추가 |
-| `NavGraph.kt` | SearchBar 토글 + 검색 UI |
+| `NavGraph.kt` | SearchBar 토글 + 검색 UI + 다크 모드 토글 |
 | `ChecklistViewModel.kt` | 정렬 + 담당자 필터 추가 |
 | `ChecklistScreen.kt` | 정렬 드롭다운 통합 |
 | `FilterState.kt` | 담당자 필터 필드 추가 |
 | `FilterRow.kt` | 정렬 + 담당자 드롭다운 추가 |
+| `MainActivity.kt` | ThemePreferences 주입, 테마 모드 적용 |
+| `AppModule.kt` | DataStore<Preferences> 제공 |
+
+### 새로운 파일 (3.6 추가)
+
+| 파일 | 설명 |
+|------|------|
+| `domain/model/ThemeMode.kt` | 테마 모드 enum (SYSTEM, LIGHT, DARK) |
+| `data/preferences/ThemePreferences.kt` | DataStore 래퍼 |
 
 ### DB 변경
-없음. 기존 스키마로 충분.
+없음. 기존 스키마로 충분. 테마 설정은 DataStore Preferences 사용.
+
+---
+
+### 3.6 Dark Mode 토글
+
+**User Story**: 사용자로서, 라이트/다크/시스템 테마를 전환하고 싶다.
+
+**구현 사항**:
+- `ThemeMode` enum: SYSTEM, LIGHT, DARK (domain layer, 순수 Kotlin)
+- `ThemePreferences`: DataStore Preferences로 테마 설정 영속화
+- TopAppBar에 테마 토글 아이콘 (SYSTEM → DARK → LIGHT 순환)
+- 아이콘: DarkMode(filled) / LightMode(filled) / DarkMode(outlined=시스템)
+- MainActivity에서 ThemeMode를 읽어 RelocationPlannerTheme에 전달
+
+**테스트**:
+- `should_cycle_system_to_dark()`
+- `should_cycle_dark_to_light()`
+- `should_cycle_light_to_system()`
+- `should_fallback_to_system_for_invalid_name()`
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] 대시보드에 원형 진행률 차트가 표시된다
-- [ ] 검색 아이콘 클릭 시 검색바가 열린다
-- [ ] 검색어 입력 시 실시간으로 결과가 표시된다
-- [ ] 체크리스트에서 정렬 옵션을 선택할 수 있다
-- [ ] 담당자별 필터링이 동작한다
-- [ ] 카테고리 카드 디자인이 개선되었다
-- [ ] 모든 새 기능에 대한 테스트가 존재한다
+- [x] 대시보드에 원형 진행률 차트가 표시된다
+- [x] 검색 아이콘 클릭 시 검색바가 열린다
+- [x] 검색어 입력 시 실시간으로 결과가 표시된다
+- [x] 체크리스트에서 정렬 옵션을 선택할 수 있다
+- [x] 담당자별 필터링이 동작한다
+- [x] 카테고리 카드 디자인이 개선되었다
+- [x] 다크 모드 토글이 동작한다 (시스템/다크/라이트)
+- [x] 모든 새 기능에 대한 테스트가 존재한다

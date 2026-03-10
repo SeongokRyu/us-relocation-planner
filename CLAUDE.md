@@ -97,5 +97,6 @@ val tasks by viewModel.tasks.collectAsStateWithLifecycle()
 
 ## Current Phase
 
-Phase 3 — Dashboard & UX 구현 중.
+Phase 3 — Dashboard & UX ✅ 완료.
 Spec: [docs/specs/phase3-dashboard-ux.md](docs/specs/phase3-dashboard-ux.md)
+Next: Phase 4 — Productivity

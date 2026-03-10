@@ -80,6 +80,9 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.activity.compose)
 
+    // DataStore
+    implementation(libs.datastore.preferences)
+
     // JSON
     implementation(libs.gson)
 

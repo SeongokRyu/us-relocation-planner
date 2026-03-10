@@ -8,7 +8,7 @@
 | 1 | Foundation | ✅ Complete | — (초기 셋업) |
 | 1.5 | Content 정비 | ✅ Complete | [content-categories.md](../specs/content-categories.md) |
 | 2 | Core Checklist | ✅ Complete | [phase2-core-checklist.md](../specs/phase2-core-checklist.md) |
-| 3 | Dashboard & UX | 🔄 Next | [phase3-dashboard-ux.md](../specs/phase3-dashboard-ux.md) |
+| 3 | Dashboard & UX | ✅ Complete | [phase3-dashboard-ux.md](../specs/phase3-dashboard-ux.md) |
 | 4 | Productivity | ⬜ Planned | phase4-productivity.md |
 | 5 | Advanced | ⬜ Planned | phase5-advanced.md |
 | 6 | Sync & Share | ⬜ Planned | phase6-sync.md |
@@ -56,14 +56,14 @@
 - [x] 유닛 테스트 (ViewModel, Entity mapping — 16 tests)
 - [x] Integration 테스트 (DAO — 8 tests, instrumented)
 
-## Phase 3 — Dashboard & UX 🔄
+## Phase 3 — Dashboard & UX ✅
 
-- [ ] 대시보드 원형 진행률 차트 (Canvas)
-- [ ] 검색 기능 (TopAppBar + SearchBar)
-- [ ] Dark mode 토글
-- [ ] 담당자 필터
-- [ ] 카드 디자인 개선 (elevation, animation)
-- [ ] 정렬 옵션 (우선순위, 마감일, 생성일)
+- [x] 대시보드 원형 진행률 차트 (Canvas)
+- [x] 검색 기능 (TopAppBar + SearchBar)
+- [x] Dark mode 토글 (시스템/다크/라이트, DataStore 영속화)
+- [x] 담당자 필터
+- [x] 카드 디자인 개선 (elevation, animation)
+- [x] 정렬 옵션 (우선순위, 마감일, 생성일)
 
 ## Phase 4 — Productivity ⬜
 
