@@ -145,6 +145,19 @@ Feature Spec (human) → Agent 구현 (code + test) → CI 검증 → PR 리뷰 
 - [Feature Roadmap](docs/roadmap/FEATURE_ROADMAP.md)
 - [Harness Plan](docs/HARNESS_PLAN.md)
 
+## iOS 버전 개발 가이드
+
+현재 Android 전용 앱이며, iOS 버전은 별도 프로젝트로 개발해야 합니다.
+
+| 방법 | 설명 |
+|------|------|
+| **Swift/SwiftUI** | iOS 네이티브로 새로 개발. 최고 품질, 코드 전면 재작성 필요 |
+| **KMP (Kotlin Multiplatform)** | 기존 Kotlin 비즈니스 로직 공유, UI만 SwiftUI로 작성 |
+| **Flutter** | 새 프로젝트로 Android + iOS 동시 지원. 단일 코드베이스 |
+
+**재활용 가능한 자산:**
+- `default_tasks.json` — 66개 체크리스트 항목 + 수행 가이드 + 참고 링크 (플랫폼 무관)
+
 ## License
 
 MIT
