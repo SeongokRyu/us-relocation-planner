@@ -7,6 +7,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import com.seongokryu.relocationplanner.data.local.AppDatabase
+import com.seongokryu.relocationplanner.data.local.dao.ContactDao
+import com.seongokryu.relocationplanner.data.local.dao.ExpenseDao
 import com.seongokryu.relocationplanner.data.local.dao.NoteDao
 import com.seongokryu.relocationplanner.data.local.dao.TaskDao
 import dagger.Module
@@ -36,6 +38,12 @@ object AppModule {
 
     @Provides
     fun provideNoteDao(database: AppDatabase): NoteDao = database.noteDao()
+
+    @Provides
+    fun provideExpenseDao(database: AppDatabase): ExpenseDao = database.expenseDao()
+
+    @Provides
+    fun provideContactDao(database: AppDatabase): ContactDao = database.contactDao()
 
     @Provides
     @Singleton

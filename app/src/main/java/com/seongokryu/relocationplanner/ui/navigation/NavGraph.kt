@@ -30,9 +30,12 @@ import androidx.navigation.navArgument
 import com.seongokryu.relocationplanner.domain.model.Category
 import com.seongokryu.relocationplanner.domain.model.ThemeMode
 import com.seongokryu.relocationplanner.ui.screens.checklist.ChecklistScreen
+import com.seongokryu.relocationplanner.ui.screens.contact.ContactScreen
 import com.seongokryu.relocationplanner.ui.screens.dashboard.DashboardScreen
 import com.seongokryu.relocationplanner.ui.screens.dashboard.DashboardViewModel
 import com.seongokryu.relocationplanner.ui.screens.detail.TaskDetailScreen
+import com.seongokryu.relocationplanner.ui.screens.exchange.ExchangeScreen
+import com.seongokryu.relocationplanner.ui.screens.expense.ExpenseScreen
 import com.seongokryu.relocationplanner.ui.screens.timeline.TimelineScreen
 import kotlinx.coroutines.launch
 
@@ -48,6 +51,12 @@ sealed class Screen(val route: String) {
     }
 
     data object Timeline : Screen("timeline")
+
+    data object Expense : Screen("expense")
+
+    data object Contact : Screen("contact")
+
+    data object Exchange : Screen("exchange")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,6 +74,9 @@ fun RelocationNavHost(
     val isDashboard = currentRoute == Screen.Dashboard.route
     val isDetail = currentRoute == Screen.TaskDetail.route
     val isTimeline = currentRoute == Screen.Timeline.route
+    val isExpense = currentRoute == Screen.Expense.route
+    val isContact = currentRoute == Screen.Contact.route
+    val isExchange = currentRoute == Screen.Exchange.route
     val categoryName = navBackStackEntry?.arguments?.getString("category")
     val category = categoryName?.let { runCatching { Category.valueOf(it) }.getOrNull() }
 
@@ -78,6 +90,45 @@ fun RelocationNavHost(
                 isTimeline -> {
                     TopAppBar(
                         title = { Text("타임라인") },
+                        navigationIcon = {
+                            IconButton(onClick = { navController.popBackStack() }) {
+                                Icon(
+                                    Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = "뒤로",
+                                )
+                            }
+                        },
+                    )
+                }
+                isExpense -> {
+                    TopAppBar(
+                        title = { Text("비용 관리") },
+                        navigationIcon = {
+                            IconButton(onClick = { navController.popBackStack() }) {
+                                Icon(
+                                    Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = "뒤로",
+                                )
+                            }
+                        },
+                    )
+                }
+                isContact -> {
+                    TopAppBar(
+                        title = { Text("연락처") },
+                        navigationIcon = {
+                            IconButton(onClick = { navController.popBackStack() }) {
+                                Icon(
+                                    Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = "뒤로",
+                                )
+                            }
+                        },
+                    )
+                }
+                isExchange -> {
+                    TopAppBar(
+                        title = { Text("환율 계산기") },
                         navigationIcon = {
                             IconButton(onClick = { navController.popBackStack() }) {
                                 Icon(
@@ -194,6 +245,15 @@ fun RelocationNavHost(
                     onTimelineClick = {
                         navController.navigate(Screen.Timeline.route)
                     },
+                    onExpenseClick = {
+                        navController.navigate(Screen.Expense.route)
+                    },
+                    onContactClick = {
+                        navController.navigate(Screen.Contact.route)
+                    },
+                    onExchangeClick = {
+                        navController.navigate(Screen.Exchange.route)
+                    },
                     viewModel = dashboardViewModel,
                 )
             }
@@ -212,6 +272,15 @@ fun RelocationNavHost(
             }
             composable(Screen.Timeline.route) {
                 TimelineScreen()
+            }
+            composable(Screen.Expense.route) {
+                ExpenseScreen()
+            }
+            composable(Screen.Contact.route) {
+                ContactScreen()
+            }
+            composable(Screen.Exchange.route) {
+                ExchangeScreen()
             }
         }
     }

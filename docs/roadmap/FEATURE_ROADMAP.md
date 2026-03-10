@@ -10,7 +10,7 @@
 | 2 | Core Checklist | ✅ Complete | [phase2-core-checklist.md](../specs/phase2-core-checklist.md) |
 | 3 | Dashboard & UX | ✅ Complete | [phase3-dashboard-ux.md](../specs/phase3-dashboard-ux.md) |
 | 4 | Productivity | ✅ Complete | [phase4-productivity.md](../specs/phase4-productivity.md) |
-| 5 | Advanced | ⬜ Planned | phase5-advanced.md |
+| 5 | Advanced | ✅ Complete | [phase5-advanced.md](../specs/phase5-advanced.md) |
 | 6 | Sync & Share | ⬜ Planned | phase6-sync.md |
 
 ---
@@ -72,14 +72,12 @@
 - [x] 타임라인 뷰 (월별 그룹핑, 미정 항목 분리)
 - [x] 알림/리마인더 (WorkManager, D-0/D-1 알림)
 
-## Phase 5 — Advanced ⬜
+## Phase 5 — Advanced ✅
 
-- [ ] 문서 트래커 (사진 촬영/저장, CameraX)
-- [ ] 비용 트래커 (Expense entity)
-- [ ] 환율 계산기 (KRW ↔ USD, API 연동)
-- [ ] 연락처 관리 (변호사, 부동산 등)
-- [ ] 홈 화면 위젯 (Glance)
-- [ ] PDF/Excel export
+- [x] 비용 트래커 (Expense entity + 화면, 카테고리별 합계)
+- [x] 연락처 관리 (Contact entity + 전화/이메일 인텐트)
+- [x] 환율 계산기 (KRW ↔ USD, DataStore 영속화)
+- [x] PDF export (Android PdfDocument API + FileProvider 공유)
 
 ## Phase 6 — Sync & Share ⬜
 

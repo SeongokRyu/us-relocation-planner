@@ -1,5 +1,6 @@
 package com.seongokryu.relocationplanner.ui.screens.dashboard
 
+import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,30 +14,42 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.seongokryu.relocationplanner.data.export.PdfExporter
 import com.seongokryu.relocationplanner.domain.model.Category
 import com.seongokryu.relocationplanner.domain.model.DueDateUtil
 import com.seongokryu.relocationplanner.domain.model.Task
 import com.seongokryu.relocationplanner.domain.model.UrgencyLevel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
 fun DashboardScreen(
     onCategoryClick: (Category) -> Unit,
     onTimelineClick: () -> Unit = {},
+    onExpenseClick: () -> Unit = {},
+    onContactClick: () -> Unit = {},
+    onExchangeClick: () -> Unit = {},
     viewModel: DashboardViewModel = hiltViewModel(),
 ) {
     val stats by viewModel.categoryStats.collectAsStateWithLifecycle()
@@ -68,6 +81,10 @@ fun DashboardScreen(
                 upcomingDeadlines = upcomingDeadlines,
                 onCategoryClick = onCategoryClick,
                 onTimelineClick = onTimelineClick,
+                onExpenseClick = onExpenseClick,
+                onContactClick = onContactClick,
+                onExchangeClick = onExchangeClick,
+                allTasks = tasks,
             )
         }
     }
@@ -82,7 +99,13 @@ private fun DashboardContent(
     upcomingDeadlines: List<Pair<Task, Int>>,
     onCategoryClick: (Category) -> Unit,
     onTimelineClick: () -> Unit,
+    onExpenseClick: () -> Unit,
+    onContactClick: () -> Unit,
+    onExchangeClick: () -> Unit,
+    allTasks: List<Task>,
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     // Circular progress
     Text("전체 진행률", style = MaterialTheme.typography.titleLarge)
     Spacer(modifier = Modifier.height(16.dp))
@@ -102,10 +125,72 @@ private fun DashboardContent(
 
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
     ) {
         Button(onClick = onTimelineClick) {
-            Text("타임라인 보기")
+            Text("타임라인")
+        }
+        Button(
+            onClick = onExpenseClick,
+            colors =
+                ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                ),
+        ) {
+            Text("비용")
+        }
+        Button(
+            onClick = onContactClick,
+            colors =
+                ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.secondary,
+                ),
+        ) {
+            Text("연락처")
+        }
+        Button(
+            onClick = onExchangeClick,
+            colors =
+                ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                ),
+        ) {
+            Text("환율")
+        }
+    }
+
+    Spacer(modifier = Modifier.height(8.dp))
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+    ) {
+        FilledTonalButton(
+            onClick = {
+                scope.launch {
+                    val file =
+                        withContext(Dispatchers.IO) {
+                            PdfExporter.exportToPdf(context, allTasks)
+                        }
+                    val uri =
+                        FileProvider.getUriForFile(
+                            context,
+                            "${context.packageName}.fileprovider",
+                            file,
+                        )
+                    val shareIntent =
+                        Intent(Intent.ACTION_SEND).apply {
+                            type = "application/pdf"
+                            putExtra(Intent.EXTRA_STREAM, uri)
+                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        }
+                    context.startActivity(
+                        Intent.createChooser(shareIntent, "체크리스트 내보내기"),
+                    )
+                }
+            },
+        ) {
+            Text("PDF 내보내기")
         }
     }
 

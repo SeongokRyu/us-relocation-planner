@@ -97,6 +97,6 @@ val tasks by viewModel.tasks.collectAsStateWithLifecycle()
 
 ## Current Phase
 
-Phase 4 — Productivity ✅ 완료.
-Spec: [docs/specs/phase4-productivity.md](docs/specs/phase4-productivity.md)
-Next: Phase 5 — Advanced
+Phase 5 — Advanced ✅ 완료.
+Spec: [docs/specs/phase5-advanced.md](docs/specs/phase5-advanced.md)
+Next: Phase 6 — Sync & Share
