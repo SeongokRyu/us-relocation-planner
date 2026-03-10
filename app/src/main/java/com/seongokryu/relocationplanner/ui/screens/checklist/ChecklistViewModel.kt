@@ -3,6 +3,7 @@ package com.seongokryu.relocationplanner.ui.screens.checklist
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.seongokryu.relocationplanner.data.repository.NoteRepository
 import com.seongokryu.relocationplanner.data.repository.TaskRepository
 import com.seongokryu.relocationplanner.domain.model.Category
 import com.seongokryu.relocationplanner.domain.model.Priority
@@ -23,6 +24,7 @@ class ChecklistViewModel
     constructor(
         savedStateHandle: SavedStateHandle,
         private val repository: TaskRepository,
+        noteRepository: NoteRepository,
     ) : ViewModel() {
         val category: Category =
             Category.valueOf(
@@ -35,6 +37,11 @@ class ChecklistViewModel
 
         val filterState = MutableStateFlow(FilterState())
         val sortOption = MutableStateFlow(SortOption.PRIORITY)
+
+        val noteCounts: StateFlow<Map<Long, Int>> =
+            noteRepository.getNoteCountsByTask()
+                .map { counts -> counts.associate { it.taskId to it.count } }
+                .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyMap())
 
         val assignees: StateFlow<List<String>> =
             allTasks.map { tasks ->

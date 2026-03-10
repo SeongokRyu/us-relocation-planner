@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
@@ -21,17 +22,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.seongokryu.relocationplanner.domain.model.Category
+import com.seongokryu.relocationplanner.domain.model.DueDateUtil
 import com.seongokryu.relocationplanner.domain.model.Task
+import com.seongokryu.relocationplanner.domain.model.UrgencyLevel
 
 @Composable
 fun DashboardScreen(
     onCategoryClick: (Category) -> Unit,
+    onTimelineClick: () -> Unit = {},
     viewModel: DashboardViewModel = hiltViewModel(),
 ) {
     val stats by viewModel.categoryStats.collectAsStateWithLifecycle()
@@ -40,6 +45,7 @@ fun DashboardScreen(
     val searchResults by viewModel.searchResults.collectAsStateWithLifecycle()
     val (done, total) = viewModel.totalProgress(stats)
     val highPriority = viewModel.getHighPriorityPending(tasks)
+    val upcomingDeadlines = viewModel.getUpcomingDeadlines(tasks)
 
     Column(
         modifier =
@@ -59,7 +65,9 @@ fun DashboardScreen(
                 total = total,
                 stats = stats,
                 highPriority = highPriority,
+                upcomingDeadlines = upcomingDeadlines,
                 onCategoryClick = onCategoryClick,
+                onTimelineClick = onTimelineClick,
             )
         }
     }
@@ -71,7 +79,9 @@ private fun DashboardContent(
     total: Int,
     stats: List<com.seongokryu.relocationplanner.data.local.dao.CategoryStat>,
     highPriority: List<Task>,
+    upcomingDeadlines: List<Pair<Task, Int>>,
     onCategoryClick: (Category) -> Unit,
+    onTimelineClick: () -> Unit,
 ) {
     // Circular progress
     Text("전체 진행률", style = MaterialTheme.typography.titleLarge)
@@ -86,6 +96,17 @@ private fun DashboardContent(
         }
     } else {
         Text("아직 등록된 할 일이 없습니다.")
+    }
+
+    Spacer(modifier = Modifier.height(12.dp))
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+    ) {
+        Button(onClick = onTimelineClick) {
+            Text("타임라인 보기")
+        }
     }
 
     Spacer(modifier = Modifier.height(24.dp))
@@ -105,6 +126,58 @@ private fun DashboardContent(
             total = catTotal,
             onClick = { onCategoryClick(category) },
         )
+    }
+
+    // Upcoming deadlines
+    if (upcomingDeadlines.isNotEmpty()) {
+        Spacer(modifier = Modifier.height(24.dp))
+        Text(
+            "마감 임박 (${upcomingDeadlines.size})",
+            style = MaterialTheme.typography.titleMedium,
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+
+        upcomingDeadlines.forEach { (task, days) ->
+            val urgency = DueDateUtil.urgencyLevel(days)
+            val dDay = DueDateUtil.formatDDay(days)
+            val urgencyColor =
+                when (urgency) {
+                    UrgencyLevel.OVERDUE -> Color(0xFFE53935)
+                    UrgencyLevel.TODAY -> Color(0xFFFF9800)
+                    UrgencyLevel.APPROACHING -> Color(0xFFFFC107)
+                    UrgencyLevel.NORMAL -> MaterialTheme.colorScheme.onSurface
+                }
+
+            Card(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 2.dp)
+                        .clickable { onCategoryClick(task.category) },
+                colors =
+                    CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface,
+                    ),
+            ) {
+                Row(
+                    modifier = Modifier.padding(12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Text(
+                        dDay,
+                        color = urgencyColor,
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Text(
+                        "${task.category.icon} ${task.title}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+            }
+        }
     }
 
     Spacer(modifier = Modifier.height(24.dp))

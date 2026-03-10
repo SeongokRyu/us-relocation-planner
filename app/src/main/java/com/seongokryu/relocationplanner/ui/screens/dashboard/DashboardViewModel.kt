@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.seongokryu.relocationplanner.data.local.dao.CategoryStat
 import com.seongokryu.relocationplanner.data.repository.TaskRepository
+import com.seongokryu.relocationplanner.domain.model.DueDateUtil
 import com.seongokryu.relocationplanner.domain.model.Priority
 import com.seongokryu.relocationplanner.domain.model.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,6 +16,8 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -57,6 +60,18 @@ class DashboardViewModel
         }
 
         fun getHighPriorityPending(tasks: List<Task>): List<Task> = tasks.filter { !it.isDone && it.priority == Priority.HIGH }
+
+        fun getUpcomingDeadlines(tasks: List<Task>): List<Pair<Task, Int>> {
+            val today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
+            return tasks
+                .filter { !it.isDone }
+                .mapNotNull { task ->
+                    DueDateUtil.daysUntil(task.dueDate, today)?.let { days ->
+                        if (days <= 3) task to days else null
+                    }
+                }
+                .sortedBy { it.second }
+        }
 
         fun totalProgress(stats: List<CategoryStat>): Pair<Int, Int> {
             val total = stats.sumOf { it.total }

@@ -21,15 +21,19 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.seongokryu.relocationplanner.domain.model.Category
 import com.seongokryu.relocationplanner.domain.model.ThemeMode
 import com.seongokryu.relocationplanner.ui.screens.checklist.ChecklistScreen
 import com.seongokryu.relocationplanner.ui.screens.dashboard.DashboardScreen
 import com.seongokryu.relocationplanner.ui.screens.dashboard.DashboardViewModel
+import com.seongokryu.relocationplanner.ui.screens.detail.TaskDetailScreen
+import com.seongokryu.relocationplanner.ui.screens.timeline.TimelineScreen
 import kotlinx.coroutines.launch
 
 sealed class Screen(val route: String) {
@@ -38,6 +42,12 @@ sealed class Screen(val route: String) {
     data object Checklist : Screen("checklist/{category}") {
         fun createRoute(category: Category) = "checklist/${category.name}"
     }
+
+    data object TaskDetail : Screen("task/{taskId}") {
+        fun createRoute(taskId: Long) = "task/$taskId"
+    }
+
+    data object Timeline : Screen("timeline")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,6 +63,8 @@ fun RelocationNavHost(
 
     val isChecklist = currentRoute == Screen.Checklist.route
     val isDashboard = currentRoute == Screen.Dashboard.route
+    val isDetail = currentRoute == Screen.TaskDetail.route
+    val isTimeline = currentRoute == Screen.Timeline.route
     val categoryName = navBackStackEntry?.arguments?.getString("category")
     val category = categoryName?.let { runCatching { Category.valueOf(it) }.getOrNull() }
 
@@ -63,6 +75,32 @@ fun RelocationNavHost(
     Scaffold(
         topBar = {
             when {
+                isTimeline -> {
+                    TopAppBar(
+                        title = { Text("타임라인") },
+                        navigationIcon = {
+                            IconButton(onClick = { navController.popBackStack() }) {
+                                Icon(
+                                    Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = "뒤로",
+                                )
+                            }
+                        },
+                    )
+                }
+                isDetail -> {
+                    TopAppBar(
+                        title = { Text("상세 정보") },
+                        navigationIcon = {
+                            IconButton(onClick = { navController.popBackStack() }) {
+                                Icon(
+                                    Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = "뒤로",
+                                )
+                            }
+                        },
+                    )
+                }
                 isChecklist && category != null -> {
                     TopAppBar(
                         title = { Text("${category.icon} ${category.label}") },
@@ -153,11 +191,27 @@ fun RelocationNavHost(
                     onCategoryClick = { cat ->
                         navController.navigate(Screen.Checklist.createRoute(cat))
                     },
+                    onTimelineClick = {
+                        navController.navigate(Screen.Timeline.route)
+                    },
                     viewModel = dashboardViewModel,
                 )
             }
             composable(Screen.Checklist.route) {
-                ChecklistScreen()
+                ChecklistScreen(
+                    onTaskClick = { taskId ->
+                        navController.navigate(Screen.TaskDetail.createRoute(taskId))
+                    },
+                )
+            }
+            composable(
+                route = Screen.TaskDetail.route,
+                arguments = listOf(navArgument("taskId") { type = NavType.LongType }),
+            ) {
+                TaskDetailScreen()
+            }
+            composable(Screen.Timeline.route) {
+                TimelineScreen()
             }
         }
     }

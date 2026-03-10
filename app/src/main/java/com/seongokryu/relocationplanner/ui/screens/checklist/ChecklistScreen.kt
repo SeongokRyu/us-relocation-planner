@@ -57,22 +57,29 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.seongokryu.relocationplanner.domain.model.Category
+import com.seongokryu.relocationplanner.domain.model.DueDateUtil
 import com.seongokryu.relocationplanner.domain.model.Priority
 import com.seongokryu.relocationplanner.domain.model.Task
+import com.seongokryu.relocationplanner.domain.model.UrgencyLevel
 import com.seongokryu.relocationplanner.ui.theme.PriorityHigh
 import com.seongokryu.relocationplanner.ui.theme.PriorityLow
 import com.seongokryu.relocationplanner.ui.theme.PriorityMedium
 import kotlinx.coroutines.launch
 import java.time.Instant
+import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 @Composable
-fun ChecklistScreen(viewModel: ChecklistViewModel = hiltViewModel()) {
+fun ChecklistScreen(
+    onTaskClick: (Long) -> Unit = {},
+    viewModel: ChecklistViewModel = hiltViewModel(),
+) {
     val tasks by viewModel.filteredTasks.collectAsStateWithLifecycle()
     val filterState by viewModel.filterState.collectAsStateWithLifecycle()
     val sortOption by viewModel.sortOption.collectAsStateWithLifecycle()
     val assignees by viewModel.assignees.collectAsStateWithLifecycle()
+    val noteCounts by viewModel.noteCounts.collectAsStateWithLifecycle()
     var showAddDialog by remember { mutableStateOf(false) }
     var editingTask by remember { mutableStateOf<Task?>(null) }
     val snackbarHostState = remember { SnackbarHostState() }
@@ -109,8 +116,9 @@ fun ChecklistScreen(viewModel: ChecklistViewModel = hiltViewModel()) {
                     items(tasks, key = { it.id }) { task ->
                         SwipeableTaskCard(
                             task = task,
+                            noteCount = noteCounts[task.id] ?: 0,
                             onToggle = { viewModel.toggleTask(task.id) },
-                            onClick = { editingTask = task },
+                            onClick = { onTaskClick(task.id) },
                             onDelete = {
                                 viewModel.deleteTask(task)
                                 scope.launch {
@@ -159,6 +167,7 @@ fun ChecklistScreen(viewModel: ChecklistViewModel = hiltViewModel()) {
 @Composable
 private fun SwipeableTaskCard(
     task: Task,
+    noteCount: Int,
     onToggle: () -> Unit,
     onClick: () -> Unit,
     onDelete: () -> Unit,
@@ -205,6 +214,7 @@ private fun SwipeableTaskCard(
     ) {
         TaskCard(
             task = task,
+            noteCount = noteCount,
             onToggle = onToggle,
             onClick = onClick,
         )
@@ -214,6 +224,7 @@ private fun SwipeableTaskCard(
 @Composable
 private fun TaskCard(
     task: Task,
+    noteCount: Int,
     onToggle: () -> Unit,
     onClick: () -> Unit,
 ) {
@@ -262,11 +273,33 @@ private fun TaskCard(
                             style = MaterialTheme.typography.labelSmall,
                         )
                     }
-                    if (!task.dueDate.isNullOrBlank()) {
+                    if (noteCount > 0) {
                         Text(
-                            "📅 ${task.dueDate}",
+                            "📝 $noteCount",
                             style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = MaterialTheme.colorScheme.primary,
+                        )
+                    }
+                    if (!task.dueDate.isNullOrBlank()) {
+                        val today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
+                        val days = DueDateUtil.daysUntil(task.dueDate, today)
+                        val dDay = days?.let { DueDateUtil.formatDDay(it) }
+                        val dueDateColor =
+                            if (!task.isDone && days != null) {
+                                when (DueDateUtil.urgencyLevel(days)) {
+                                    UrgencyLevel.OVERDUE -> Color(0xFFE53935)
+                                    UrgencyLevel.TODAY -> Color(0xFFFF9800)
+                                    UrgencyLevel.APPROACHING -> Color(0xFFFFC107)
+                                    UrgencyLevel.NORMAL -> MaterialTheme.colorScheme.onSurfaceVariant
+                                }
+                            } else {
+                                MaterialTheme.colorScheme.onSurfaceVariant
+                            }
+                        val label = if (dDay != null) "📅 ${task.dueDate} ($dDay)" else "📅 ${task.dueDate}"
+                        Text(
+                            label,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = dueDateColor,
                         )
                     }
                 }

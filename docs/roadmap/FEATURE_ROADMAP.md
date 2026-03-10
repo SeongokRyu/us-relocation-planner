@@ -9,7 +9,7 @@
 | 1.5 | Content 정비 | ✅ Complete | [content-categories.md](../specs/content-categories.md) |
 | 2 | Core Checklist | ✅ Complete | [phase2-core-checklist.md](../specs/phase2-core-checklist.md) |
 | 3 | Dashboard & UX | ✅ Complete | [phase3-dashboard-ux.md](../specs/phase3-dashboard-ux.md) |
-| 4 | Productivity | ⬜ Planned | phase4-productivity.md |
+| 4 | Productivity | ✅ Complete | [phase4-productivity.md](../specs/phase4-productivity.md) |
 | 5 | Advanced | ⬜ Planned | phase5-advanced.md |
 | 6 | Sync & Share | ⬜ Planned | phase6-sync.md |
 
@@ -65,13 +65,12 @@
 - [x] 카드 디자인 개선 (elevation, animation)
 - [x] 정렬 옵션 (우선순위, 마감일, 생성일)
 
-## Phase 4 — Productivity ⬜
+## Phase 4 — Productivity ✅
 
-- [ ] Due date DatePicker integration
-- [ ] 알림/리마인더 (WorkManager)
-- [ ] Task별 메모/노트 (Note entity + NoteDao)
-- [ ] 캘린더/타임라인 뷰
-- [ ] 마감일 임박 항목 하이라이트
+- [x] 마감일 임박 하이라이트 (D-day 표시, 긴급도별 색상)
+- [x] Task별 메모/노트 (Note entity + NoteDao + 상세 화면)
+- [x] 타임라인 뷰 (월별 그룹핑, 미정 항목 분리)
+- [x] 알림/리마인더 (WorkManager, D-0/D-1 알림)
 
 ## Phase 5 — Advanced ⬜
 

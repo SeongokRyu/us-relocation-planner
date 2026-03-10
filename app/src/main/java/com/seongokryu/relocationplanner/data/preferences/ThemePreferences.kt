@@ -2,6 +2,7 @@ package com.seongokryu.relocationplanner.data.preferences
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.seongokryu.relocationplanner.domain.model.ThemeMode
@@ -28,7 +29,19 @@ class ThemePreferences
             }
         }
 
+        val notificationsEnabled: Flow<Boolean> =
+            dataStore.data.map { prefs ->
+                prefs[NOTIFICATIONS_KEY] ?: true
+            }
+
+        suspend fun setNotificationsEnabled(enabled: Boolean) {
+            dataStore.edit { prefs ->
+                prefs[NOTIFICATIONS_KEY] = enabled
+            }
+        }
+
         companion object {
             private val THEME_MODE_KEY = stringPreferencesKey("theme_mode")
+            private val NOTIFICATIONS_KEY = booleanPreferencesKey("notifications_enabled")
         }
     }
