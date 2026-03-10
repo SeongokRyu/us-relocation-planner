@@ -1,9 +1,11 @@
-# US Relocation Planner
+# 렛츠고 USA 🇺🇸
 
 미국 이주를 준비하는 사용자를 위한 체크리스트/플래너 Android 앱.
 
 카테고리별로 할 일을 관리하고, 대시보드에서 전체 진행률을 확인하며,
 비용 추적, 연락처 관리, 환율 계산 등 이주에 필요한 모든 것을 하나의 앱에서 관리할 수 있습니다.
+
+> **[APK 다운로드](https://github.com/SeongokRyu/us-relocation-planner/releases/latest)** — GitHub Releases에서 최신 APK를 받을 수 있습니다.
 
 > **Harness Engineering** 방식으로 개발합니다.
 > Human의 개입을 최소화하고, AI 에이전트가 spec 기반으로 구현 → CI 검증 → 머지하는 사이클을 따릅니다.
@@ -96,6 +98,7 @@ app/src/main/java/com/seongokryu/relocationplanner/
 ### 체크리스트 관리
 - **8개 카테고리** — 비자, 서류, 주거, 재정, 커리어, 의료, 교통, 한국 정리
 - **66개 기본 항목** — 첫 실행 시 자동 생성
+- **항목별 수행 가이드** — 각 항목에 단계별 수행 방법 + 참고 링크 제공
 - **CRUD** — 항목 추가/수정/삭제/완료 토글
 - **필터 & 정렬** — 상태, 우선순위, 담당자별 필터링 + 다중 정렬
 - **검색** — 제목/설명 전체 검색
